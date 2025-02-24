@@ -5,7 +5,7 @@ on:
 
 env:
   AZURE_FUNCTIONAPP_NAME: marco-polo
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: ./handler
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'deploy'  # Directory to deploy, containing binary and host.json
 
 jobs:
   build-and-deploy:
@@ -25,10 +25,10 @@ jobs:
         shell: bash
         run: |
           cargo build --release --target=x86_64-unknown-linux-musl
-          cp target/x86_64-unknown-linux-musl/release/handler .
-      - name: Copy handler to parent directory
-        shell: bash
-        run: cp target/x86_64-unknown-linux-musl/release/handler .
+          # Create deploy directory and copy necessary files
+          mkdir -p deploy
+          cp target/x86_64-unknown-linux-musl/release/handler deploy/  # Use "handler" to match Cargo.toml
+          cp host.json deploy/
       - name: Azure Login
         uses: azure/login@v1
         with:
