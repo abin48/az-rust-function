@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_NAME: marco-polo # set this to your application's name
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app program
+  AZURE_FUNCTIONAPP_NAME: marco-polo
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: ./handler
 
 jobs:
   build-and-deploy:
@@ -39,4 +39,3 @@ jobs:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           respect-funcignore: true
-
