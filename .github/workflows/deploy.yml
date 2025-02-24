@@ -27,7 +27,7 @@ jobs:
           cargo build --release --target=x86_64-unknown-linux-musl
           # Create deploy directory and copy necessary files
           mkdir -p deploy
-          cp target/x86_64-unknown-linux-musl/release/handler deploy/  # Use "handler" to match Cargo.toml
+          cp target/x86_64-unknown-linux-musl/release/handler deploy/  # Matches Cargo.toml name
           cp host.json deploy/
       - name: Azure Login
         uses: azure/login@v1
